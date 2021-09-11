@@ -1,0 +1,117 @@
+#header {
+  background-color: var(--body-color);
+  border-bottom: 1px solid #e4e4e4;
+  padding: 0 1rem;
+  display: flex;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  .logo {
+    font: 700 1.31rem "Poppins", sans-serif;
+    color: var(--title-color);
+
+    span {
+      color: var(--base-color);
+    }
+  }
+
+  nav {
+    height: var(--header-height);
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    .icon-cross {
+      /* display: none; */
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      top: -1.5rem;
+      right: 1.5rem;
+      transition: 0.3s;
+    }
+
+    .menu {
+      visibility: hidden;
+      opacity: 0;
+      top: -20rem;
+      transition: 0.3s;
+  
+      ul {
+        display: none;
+      }
+    }
+  }
+
+  i {
+    color: var(--base-color);
+    font-size: 1.5rem;
+  }
+
+  nav.show {
+    .menu {
+      visibility: visible;
+      opacity: 1;
+      display: grid;
+      place-content: center;
+      height: 100vh;
+      width: 100vw;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: var(--body-color);
+
+      ul {
+        display: grid;
+      }
+    }
+
+    ul.grid {
+      gap: 4rem;
+    }
+
+    .icon-cross {
+      visibility: visible;
+      opacity: 1;
+      top: 1.5rem;
+    }
+
+    nav ul li {
+      text-align: center;
+      a {
+        transition: color 0.2s;
+        position: relative;
+      }
+  
+      a::after {
+        content: "";
+        width: 0;
+        height: 2px;
+        background: var(--base-color);
+        position: absolute;
+        left: 0;
+        bottom: -1.5rem;
+        transition: width 0.2s;
+      }
+  
+      a:hover {
+        color: var(--base-color);
+      }
+  
+      a:hover::after {
+        width: 100%;
+      }
+    }
+  
+  }
+
+  .toggle {
+    color: var(--base-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}
