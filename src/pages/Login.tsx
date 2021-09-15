@@ -1,7 +1,6 @@
-import { Link, useHistory } from 'react-router-dom'
-import { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom'
+import { useContext } from 'react';
 
-import { auth, firebase } from '../services/firebase'
 import { AuthContext } from '../App';
 
 import '../styles/login.scss'
@@ -13,8 +12,11 @@ import '../styles/login.scss'
 
 export function Login() {
   const history = useHistory();
-  const user = useContext(AuthContext);
-  // const [login, setLogin] = useState<Login>();
+  const { user, signInWithEmail } = useContext(AuthContext);
+
+  if (user){
+    history.push('/home')
+  }
 
   function handleSubmit(e: any){
     e.preventDefault()
@@ -26,8 +28,7 @@ export function Login() {
     //   email: e.target[0].value,
     //   password: e.target[1].value,
     // })
-    
-    user.signInWithEmail(e.target[0].value, e.target[1].value)
+    signInWithEmail(e.target[0].value, e.target[1].value)
   }
 
   return (
@@ -41,7 +42,6 @@ export function Login() {
         <button type="submit"  className="btn btn-primary btn-block btn-large">Entrar</button>
       </form>
       <div>
-        <button >Ver variaveis</button>
       </div>
     </div>
   )

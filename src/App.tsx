@@ -1,51 +1,54 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 
-import { auth, firebase } from './services/firebase';
+import { auth } from './services/firebase';
 
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 
 type User = {
   id: string;
-  name: string;
-}
-
-type LoginType = {
-  data: string;
+  name: string | null;
+  email: string | null;
 }
 
 type AuthContextType = {
   user: User | undefined,
-  signInWithEmail: (el: string, p: string) => void
+  signInWithEmail: (el: string, p: string) => Promise<void>
 }
 
 export const AuthContext = createContext({} as AuthContextType)
 
 function App() {
   const [user, setUser] = useState<User>();
-  
-  function signInWithEmail(email:string, password: string) {
-    
-    auth.signInWithEmailAndPassword(email, password).then((userCredential) => {
-        if (userCredential.user) {
-          const { displayName, uid, email, providerId } = userCredential.user;
-          
-          setUser({
-            id: uid,
-            name: providerId
-          })
 
-          console.log(user?.id, user?.name)
+  useEffect(() => {
+    auth.onAuthStateChanged( user =>{
+      if (user) {
+        const { displayName, uid, email } = user;
+        
+        setUser({
+          id: uid,
+          name: displayName,
+          email: email
+        })
         }
+    })
+  }, [])
+  
+  async function signInWithEmail(email:string, password: string) {
 
+    const userCredential = await auth.signInWithEmailAndPassword(email, password);
+
+    if (userCredential.user) {
+      const { displayName, uid, email } = userCredential.user;
+      
+      setUser({
+        id: uid,
+        name: displayName,
+        email: email
       })
-      .catch((error) => {
-        alert('Ops, algo está errado! Confira o e-mail e senha e tente novamente.')
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorMessage)
-      });
+    }
   }
 
 
@@ -53,7 +56,7 @@ function App() {
     <BrowserRouter>
       <AuthContext.Provider value={{ user, signInWithEmail }}>
         <Route path="/" exact component={Login} />
-        <Route path="/home/" component={Home} />
+        <Route path="/home" component={Home} />
       </AuthContext.Provider>
     </BrowserRouter>
   );
