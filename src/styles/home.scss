@@ -1,0 +1,14 @@
+main{
+ margin-top: var(--header-height);
+ height: calc(100vh - var(--header-height));
+ background:peru;
+}
+
+.teste {
+
+  text-align: center;
+  img {
+    margin-top: 10px;
+    max-width: 90%;
+  }
+}
