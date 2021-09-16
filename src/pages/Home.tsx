@@ -1,14 +1,14 @@
-import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
-import { AuthContext } from "../App";
+import { useAuth } from '../hooks/useAuth'
+
 import { Header } from "../components/Header"
 
 import '../styles/home.scss'
 
 export function Home() {
   const history = useHistory()
-  const { user } = useContext(AuthContext)
+  const { user } = useAuth()
   
   if(!user){
     history.push('/')

@@ -1,13 +1,12 @@
 import { useHistory } from 'react-router-dom'
-import { useContext } from 'react';
 
-import { AuthContext } from '../App';
+import { useAuth } from '../hooks/useAuth'
 
 import '../styles/login.scss'
 
 export function Login() {
   const history = useHistory();
-  const { user, signInWithEmail } = useContext(AuthContext);
+  const { user, signInWithEmail } = useAuth();
 
   if (user){
     history.push('/home')

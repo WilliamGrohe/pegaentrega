@@ -1,10 +1,11 @@
-import { AuthContext } from '../App';
-import { useContext } from "react";
-import '../styles/header.scss'
 import { Link } from 'react-router-dom';
 
+import { useAuth } from '../hooks/useAuth'
+
+import '../styles/header.scss'
+
 export function Header() {
-  const { user, handleSignOut } = useContext(AuthContext);
+  const { user, handleSignOut } = useAuth();
 
   const nav = document.querySelector('#header nav')
 
