@@ -14,16 +14,24 @@ type User = {
 
 type AuthContextType = {
   user: User | undefined,
-  signInWithEmail: (el: string, p: string) => Promise<void>
+  signInWithEmail: (el: string, p: string) => Promise<void>,
+  handleSignOut: () => void
 }
 
 export const AuthContext = createContext({} as AuthContextType)
 
 function App() {
   const [user, setUser] = useState<User>();
+  
+  function handleSignOut() {
+    auth.signOut().then(() =>{
+      alert('Deslogado com sucesso!');
+      console.log(user?.name);
+    })
+  }
 
   useEffect(() => {
-    auth.onAuthStateChanged( user =>{
+    const unsubscribe = auth.onAuthStateChanged( user =>{
       if (user) {
         const { displayName, uid, email } = user;
         
@@ -32,9 +40,14 @@ function App() {
           name: displayName,
           email: email
         })
-        }
+      }
     })
+
+    return () =>{
+      unsubscribe();
+    }
   }, [])
+
   
   async function signInWithEmail(email:string, password: string) {
 
@@ -54,7 +67,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <AuthContext.Provider value={{ user, signInWithEmail }}>
+      <AuthContext.Provider value={{ user, signInWithEmail, handleSignOut }}>
         <Route path="/" exact component={Login} />
         <Route path="/home" component={Home} />
       </AuthContext.Provider>
