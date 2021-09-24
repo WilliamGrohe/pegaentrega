@@ -34,6 +34,7 @@ export function Header() {
             <Link to="/" onClick={handleSignOut}>Logout</Link>
           </div>
         </div>
+        
         <div className="toggle icon-menu" onClick={heandleMenuToggle}><i className="fas fa-bars"></i></div>
         <div className="toggle icon-cross" onClick={heandleMenuToggle}><i className="fas fa-times"></i></div>
       </nav>

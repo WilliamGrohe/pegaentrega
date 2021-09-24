@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from '../hooks/useAuth'
 
 import { Header } from "../components/Header"
+import { GoogleMaps } from "../components/GoogleMaps"
 
 import '../styles/home.scss'
 
@@ -18,8 +19,8 @@ export function Home() {
     <>
       <Header />
       <main>
-        <div className="teste">
-          <img src="https://i.imgur.com/m1RlnWR.jpg" alt="" />
+        <div id="map" className="teste">
+          <GoogleMaps />
         </div>
         <h1>Hello World!</h1>
         <h1>{user?.name}</h1>
