@@ -25,8 +25,11 @@ export function NewDelivery() {
     const latLng = await getLatLng(results[0])
     setLatLngOnContext(latLng.lat, latLng.lng)
   }
-
-  useEffect(() => {getSelectionLatLng()}, [resultAdress])
+  
+  useEffect(()=> {
+    getSelectionLatLng()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [adress])
 
   return (
     <>
@@ -41,6 +44,7 @@ export function NewDelivery() {
             location: 'LatLng',
             adress,
             onChange: setAdress
+            
           }}
         />
         <NewDeliveryForm />
