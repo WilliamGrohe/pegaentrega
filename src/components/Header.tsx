@@ -23,8 +23,8 @@ export function Header() {
         <a className="logo" href="#home">pega<span>entrega</span>.</a>
         <div className="menu">
           <ul className="grid">
-            <li><a className="title" onClick={heandleMenuClose} href="#home">Início</a></li>
-            <li><a className="title" onClick={heandleMenuClose} href="#about">Nova Entrega</a></li>
+            <li><Link to="/home" className="title" onClick={heandleMenuClose}>Início</Link></li>
+            <li><Link to="/newdelivery" className="title" onClick={heandleMenuClose}>Nova Entrega</Link></li>
             <li><a className="title" onClick={heandleMenuClose} href="#services">Agenda</a></li>
             <li><a className="title" onClick={heandleMenuClose} href="#testemonials">...</a></li>
           </ul>

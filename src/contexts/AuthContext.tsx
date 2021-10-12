@@ -46,9 +46,8 @@ export function AuthContextProvider(props: AuthContextProviderType){
       unsubscribe();
     }
   }, [])
-
   
-  async function signInWithEmail(email:string, password: string) {
+  async function signInWithEmail(email: string, password: string) {
 
     const userCredential = await auth.signInWithEmailAndPassword(email, password);
 
