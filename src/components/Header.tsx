@@ -1,25 +1,31 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useAuth } from '../hooks/useAuth'
 
 import '../styles/header.scss'
 
 export function Header() {
+  const history = useHistory()
   const { user, handleSignOut } = useAuth();
 
-  const nav = document.querySelector('#header nav')
+  // const nav = document.querySelector('#header nav')
+  const nav = document.getElementById('menu')
 
-  function heandleMenuToggle () {
+  if(!nav){
+    history.push('/home') 
+  }
+
+  function heandleMenuToggle() {
     nav?.classList.toggle('show');
   }
 
-  function heandleMenuClose(){
+  function heandleMenuClose() {
     nav?.classList.remove('show');
   }
-
+ 
   return (
     <header id="header">
-      <nav className="container">
+      <nav id="menu" className="container">
         <a className="logo" href="#home">pega<span>entrega</span>.</a>
         <div className="menu">
           <ul className="grid">
@@ -29,15 +35,16 @@ export function Header() {
             <li><a className="title" onClick={heandleMenuClose} href="#testemonials">...</a></li>
           </ul>
           <div className="userSection">
-            <h4>{user?.name}</h4> 
+            <h4>{user?.name}</h4>
             <h5>{user?.email}</h5>
             <Link to="/" onClick={handleSignOut}>Logout</Link>
           </div>
         </div>
-        
-        <div className="toggle icon-menu" onClick={heandleMenuToggle}><i className="fas fa-bars"></i></div>
+
+        <div id="burger" className="toggle icon-menu" onClick={heandleMenuToggle} ><i className="fas fa-bars"></i></div>
         <div className="toggle icon-cross" onClick={heandleMenuToggle}><i className="fas fa-times"></i></div>
       </nav>
     </header>
   );
+
 }
