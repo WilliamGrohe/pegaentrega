@@ -19,8 +19,11 @@
   --title-font-size: 1.85rem;
 }
 
+html{
+  background: rgb(47, 169, 198);
+  background: linear-gradient(139deg, rgba(47, 169, 198, 1) 0%, rgba(11, 153, 120, 1) 100%);
+}
+
 body {
-	background: rgb(47, 169, 198);
-	background: linear-gradient(139deg, rgba(47, 169, 198, 1) 0%, rgba(11, 153, 120, 1) 100%);
   font-family: 'Poppins', sans-serif;
 }
