@@ -25,7 +25,7 @@ export function Login() {
           }}>
         <input type="text" name="user" placeholder="Username" />
         <input type="password" name="password" placeholder="Password" />
-        <button type="submit" className="btn btn-primary btn-block btn-large">Entrar</button>
+        <button type="submit" className="buttonClass">Entrar</button>
       </form>
       <div>
       </div>
