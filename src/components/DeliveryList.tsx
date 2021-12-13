@@ -31,7 +31,7 @@ export function DeliveryList({
       <td className="u-table-cell">{adress}<br/>
       </td>
       <td className="u-table-cell">Manha</td>
-      <td className="u-table-cell"><button className="btn-delete" onClick={i => removeDelivery(id, name)}><img src={trashIcon} /></button></td>
+      <td className="u-table-cell"><button className="btn-delete" onClick={i => removeDelivery(id, name)}><img src={trashIcon} alt="Lixeira"/></button></td>
     </tr>
   )
 }

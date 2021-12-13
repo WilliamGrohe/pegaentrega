@@ -22,21 +22,7 @@ export function GoogleMaps() {
     center: initialLocal,
     zoom: 11.5
   };
-
-  let latTemp = 0
-  let lngTemp = 0
-
-  if (coords) {
-    latTemp = coords?.latitude
-    lngTemp = coords?.longitude
-  }
-
-  let points = [
-    { lat: -29.1673608, lng: -51.177434 },
-    { lat: latTemp, lng: lngTemp },
-  ]
-
-
+  
   // loader
   //   .load()
   //   .then((google) => {
