@@ -16,6 +16,7 @@ export function NewDelivery() {
 
   // https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
   
+
   
   const [adress, setAdress] = useState('');
   const resultAdress = Object.values(adress)[0];
@@ -23,13 +24,15 @@ export function NewDelivery() {
   async function getSelectionLatLng() {
     const results = await geocodeByAddress(resultAdress)
     const latLng = await getLatLng(results[0])
-    setLatLngOnContext(latLng.lat, latLng.lng)
+    setLatLngOnContext(latLng.lat, latLng.lng, resultAdress)
   }
   
   useEffect(()=> {
     getSelectionLatLng()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [adress])
+
+  
 
   return (
     <>
@@ -44,7 +47,6 @@ export function NewDelivery() {
             location: 'LatLng',
             adress,
             onChange: setAdress
-            
           }}
         />
         <NewDeliveryForm />

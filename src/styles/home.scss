@@ -1,13 +1,20 @@
 main {
   margin-top: var(--header-height);
   //  height: calc(100vh - var(--header-height));
-  height: 100vh;
-  overflow: hidden;
+
 }
 
-.teste {
+.map {
   text-align: center;
 
   height: 300px;
   width: auto;
+}
+
+
+// ******************************************
+.u-table-entity {
+  padding: 30px;
+  width: 100%; 
+  text-align: center;
 }

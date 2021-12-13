@@ -1,23 +1,24 @@
-import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react"
+import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react"
 import { useHistory } from "react-router"
 import { database } from "../services/firebase"
 
 type DeliveryInfo = {
   name: string,
   vol: string,
-  obs: string
+  obs: string,
+  adress?: string
 }
 
 type CoordinatesType = {
   latitude: number,
-  longitude: number
+  longitude: number,
+  adress?: string
 }
 
 type ValueType = {
   coords: CoordinatesType | undefined,
-  setDeliveryData: (name: string, volume:string, obs:string) => void,
   setDeliveryInfos: Dispatch<SetStateAction<DeliveryInfo | undefined>>,
-  setLatLngOnContext: (lat: number, lng: number) => void | undefined
+  setLatLngOnContext: (lat: number, lng: number, adress: string) => void | undefined
 }
 
 type LocalsContextProviderType = {
@@ -31,50 +32,33 @@ export function LocalsContextProvider(props: LocalsContextProviderType){
   const [coords, setCoords ] = useState<CoordinatesType>()
   const [deliveryInfos, setDeliveryInfos] = useState<DeliveryInfo>()
 
-  function setLatLngOnContext(lat:  number, lng: number){
+  function setLatLngOnContext(lat:  number, lng: number, adress: string){
     setCoords({
      latitude: lat,
-     longitude: lng
+     longitude: lng,
+     adress: adress
     })
+
+    console.log(adress)
   }
 
-  function setDeliveryData(name: string, volume: string, obs:string){
-    const n = name
-    const v = volume
-    const o = obs
-    const i = {
-      name: n,
-      vol: v,
-      obs: o
+  useEffect(()=>{
+    if(deliveryInfos && coords?.latitude !== 0){
+      saveDeliveryOnDatabase()
     }
-    // setDeliveryInfos({
-    //   name: n,
-    //   vol: v,
-    //   obs: o
-    // })
-    
-    if (!coords?.latitude) {
-      alert('Erro ao carregar endereço. Favor selecionar novamente.')
-      return;
-    }
-    console.log('no context', deliveryInfos?.name, deliveryInfos?.obs, deliveryInfos?.vol, n, v, o, i)
-    
-    // saveDeliveryOnDatabase() 
-  }
-
-  if(coords?.latitude && deliveryInfos?.name){
-    saveDeliveryOnDatabase() 
-  }
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[deliveryInfos])
+  
 
   async function saveDeliveryOnDatabase(){
     const deliveriesRef = database.ref('deliveries');
     const firebaseDelivery = await deliveriesRef.push({
-      title: deliveryInfos?.name,
       lat: coords?.latitude,
       long: coords?.longitude,
+      adress: coords?.adress,
+      title: deliveryInfos?.name,
       vol: deliveryInfos?.vol,
-      obs: deliveryInfos?.obs
+      obs: deliveryInfos?.obs,
     })
 
     alert(`Entrega criada. ID: ${firebaseDelivery.key}`)
@@ -82,14 +66,12 @@ export function LocalsContextProvider(props: LocalsContextProviderType){
 
     setCoords({
       latitude: 0,
-      longitude: 0
+      longitude: 0,
     })
   }
 
-
-
   return(
-    <LocalsContext.Provider value={{ coords, setDeliveryData, setLatLngOnContext, setDeliveryInfos }}>
+    <LocalsContext.Provider value={{ coords, setLatLngOnContext, setDeliveryInfos }}>
       {props.children}
     </LocalsContext.Provider>
   );
