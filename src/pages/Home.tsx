@@ -33,7 +33,7 @@ export function Home() {
         <a href="#">Atualizar entregas</a>
 
         <div className="delivery-list">
-          <table className="u-table-entity">
+          <table className="table-action">
 
             <thead className="table-header">
               <tr>

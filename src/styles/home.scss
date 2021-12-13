@@ -1,7 +1,7 @@
 main {
   margin-top: var(--header-height);
   //  height: calc(100vh - var(--header-height));
-
+  overflow-x: hidden;
 }
 
 .map {
@@ -17,4 +17,31 @@ main {
   padding: 30px;
   width: 100%; 
   text-align: center;
+}
+
+.table-action .row-list {
+  border-bottom: 1px solid #dddddd;
+}
+
+@media (max-width: 480px) {
+  .table-action thead {
+    display: none;
+  }
+
+  .table-action td {
+    border: 0;
+  }
+
+  .table-action tr:nth-child(odd){
+    background-color: rgba(0, 0, 0, 0.05);
+   }
+
+  .table-action td:not(:first-child) {
+    display: block;
+  }
+
+   #vol {
+    display:flex;
+    
+  }
 }

@@ -25,13 +25,13 @@ export function DeliveryList({
 
   return (
     <tr className="row-list">
-      <td className="u-table-cell"><h4>{name}</h4></td>
-      <td className="u-table-cell">{volumes}<br/>
+      <td className="u-table-cell" id="name"><h4>{name}</h4></td>
+      <td className="u-table-cell" id="vol">{volumes}<br/>
       </td>
       <td className="u-table-cell">{adress}<br/>
       </td>
       <td className="u-table-cell">Manha</td>
-      <td className="u-table-cell"><button className="btn-delete" onClick={i => removeDelivery(id, name)}><img src={trashIcon} alt="Lixeira"/></button></td>
+      <td className="u-table-cell" id="edit"><button className="btn-delete" onClick={i => removeDelivery(id, name)}><img src={trashIcon} alt="Lixeira"/></button></td>
     </tr>
   )
 }
