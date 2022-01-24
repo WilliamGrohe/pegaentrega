@@ -53,14 +53,16 @@ export function GoogleMaps() {
     for (var i = 0; i < pointsDeliveries.length; i++) {
       new configMaps.maps.Marker({
         position: { lat: pointsDeliveries[i].lat, lng: pointsDeliveries[i].lng },
-        map: map
+        map: map,
+        title: pointsDeliveries[i].name
       });
     }
 
     if (coords){
       new configMaps.maps.Marker({
         position: { lat: coords.latitude, lng: coords.longitude },
-        map: map
+        map: map,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
       });
     }
 

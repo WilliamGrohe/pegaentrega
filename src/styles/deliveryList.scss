@@ -8,3 +8,66 @@
 .table-action tr {
   border-bottom: 1px solid #dddddd;
 }
+
+.table-action {
+  width: 100%;
+}
+
+#edit {
+  text-align: center;
+}
+
+#vol {
+  text-align: center;
+}
+
+
+.close-modal{
+  color: #FFF;
+  border: none;
+  background-color: crimson;
+  border-radius: 11px;
+  width: 22px;
+  height: 22px;
+  float: right;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+  color: rgb(131, 0, 0);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.div-obs {
+  background-color: rgb(214, 214, 214);
+  border-radius: 5px;
+  padding: 10px;
+  height: 100px;
+}
+
+.modal-actions {
+  text-align: center;
+}
+
+#edit {
+  img{
+    padding-left: 10px;
+  }
+}

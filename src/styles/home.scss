@@ -21,8 +21,12 @@ main {
 
 .table-action .row-list {
   border-bottom: 1px solid #dddddd;
+  width: 100%;
 }
 
+
+
+// ********* TABELA DAS ENTREGAS RESPONSIVA ****************
 @media (max-width: 480px) {
   .table-action thead {
     display: none;
@@ -30,6 +34,7 @@ main {
 
   .table-action td {
     border: 0;
+    align-self: center;
   }
 
   .table-action tr:nth-child(odd){
@@ -42,6 +47,8 @@ main {
 
    #vol {
     display:flex;
-    
+    text-align: center;
   }
+
+  
 }

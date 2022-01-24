@@ -6,7 +6,8 @@ type DeliveryInfo = {
   name: string,
   vol: string,
   obs: string,
-  adress?: string
+  adress?: string, 
+  date: string
 }
 
 type CoordinatesType = {

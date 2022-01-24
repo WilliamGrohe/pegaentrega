@@ -8,6 +8,7 @@ type DeliveryFirebase = Record<string, {
   title: string;
   vol: string;
   adress: string;
+  inRoad?: boolean;
 }>
 
 type Delivery = {
@@ -17,6 +18,7 @@ type Delivery = {
   name: string;
   adress: string;
   volumes: string;
+  inRoad?: boolean;
 }
 
 function useDeliveries() {
@@ -36,7 +38,8 @@ function useDeliveries() {
           lng: value.long,
           name: value.title,
           volumes: value.vol,
-          adress: value.adress
+          adress: value.adress,
+          inRoad: value.inRoad
         }
       })
   

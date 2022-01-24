@@ -23,6 +23,7 @@ export function Home() {
   const deliveries = useDeliveries()
 
 
+
   return (
     <>
       <Header />
@@ -30,8 +31,6 @@ export function Home() {
         <div id="map" className="map">
           <GoogleMaps />
         </div>
-        <a href="#">Atualizar entregas</a>
-
         <div className="delivery-list">
           <table className="table-action">
 
@@ -41,7 +40,7 @@ export function Home() {
                 <th>VOL</th>
                 <th>ENDEREÇO</th>
                 <th>TURNO</th>
-                <th>EDITAR<br />
+                <th>STATUS<br />
                 </th>
               </tr>
             </thead>
@@ -53,6 +52,7 @@ export function Home() {
                     volumes={delivery.volumes}
                     id={delivery.id}
                     adress={delivery.adress}
+                    inRoad={delivery.inRoad}
                   />
                 )
               })}
@@ -60,6 +60,7 @@ export function Home() {
           </table>
 
         </div>
+
       </main>
     </>
   );
