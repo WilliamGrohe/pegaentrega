@@ -9,16 +9,15 @@ import { useDeliveries } from '../hooks/useDeliveries'
 
 import '../styles/home.scss'
 
-export function Home() {
+export function Motorista() {
   const history = useHistory()
   const { user } = useAuth()
 
   if (!user) {
     history.push('/')
-  } else if (user.name !== "Televendas"){
-    history.push('/motorista')
+  } else if (user.name !== "Motorista"){
+    history.push('/home')
   }
-
 
   // const entregasDatabase = DatabaseDeliveries()
 
@@ -32,6 +31,7 @@ export function Home() {
           <GoogleMaps />
         </div>
         <div className="delivery-list">
+          <h2>MOTORISTA</h2>
           <table className="table-action">
 
             <thead className="table-header">
@@ -42,6 +42,9 @@ export function Home() {
                 <th>TURNO</th>
                 <th>STATUS<br />
                 </th>
+              </tr>
+              <tr>
+                <th colSpan={5}>EM LOJA</th>
               </tr>
             </thead>
             <tbody className="u-align-center u-table-body">
