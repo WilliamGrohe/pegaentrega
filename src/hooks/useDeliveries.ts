@@ -9,6 +9,7 @@ type DeliveryFirebase = Record<string, {
   vol: string;
   adress: string;
   inRoad?: boolean;
+  finished: boolean;
 }>
 
 type Delivery = {
@@ -19,6 +20,7 @@ type Delivery = {
   adress: string;
   volumes: string;
   inRoad?: boolean;
+  finished: boolean;
 }
 
 function useDeliveries() {
@@ -39,7 +41,8 @@ function useDeliveries() {
           name: value.title,
           volumes: value.vol,
           adress: value.adress,
-          inRoad: value.inRoad
+          inRoad: value.inRoad,
+          finished: value.finished
         }
       })
   
@@ -57,5 +60,17 @@ async function handleDeleteDelivery(deliveryId: string, name: string){
   }
 }
 
-export { handleDeleteDelivery, useDeliveries}
+async function handleUpdateInRoadDelivery(deliveryId: string, value: boolean) {
+  const updates = {inRoad: value}
+
+  await database.ref(`deliveries/${deliveryId}/`).update(updates)
+}
+
+async function handleUpdateFinishedDelivery(deliveryId: string, value: boolean) {
+  const updates = {finished: value}
+
+  await database.ref(`deliveries/${deliveryId}/`).update(updates)
+}
+
+export { handleDeleteDelivery, handleUpdateInRoadDelivery, handleUpdateFinishedDelivery, useDeliveries}
 

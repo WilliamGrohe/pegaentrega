@@ -22,26 +22,6 @@ export function GoogleMaps() {
     center: initialLocal,
     zoom: 11.5
   };
-  
-  // loader
-  //   .load()
-  //   .then((google) => {
-  //     const map = new google.maps.Map(document.getElementById("map") as HTMLElement, mapOptions);
-
-  //     for (var i = 0; i < points.length; i++) {
-  //       // console.log(points[i])
-  //       new google.maps.Marker({
-  //         position: points[i],
-  //         map: map
-  //       });
-  //     };
-
-
-  //   })
-  //   .catch(e => {
-  //     console.log(e)
-  //   })
-
 
   const pointsDeliveries = useDeliveries()
 
@@ -51,11 +31,13 @@ export function GoogleMaps() {
     const map = new configMaps.maps.Map(document.getElementById("map") as HTMLElement, mapOptions)
 
     for (var i = 0; i < pointsDeliveries.length; i++) {
-      new configMaps.maps.Marker({
-        position: { lat: pointsDeliveries[i].lat, lng: pointsDeliveries[i].lng },
-        map: map,
-        title: pointsDeliveries[i].name
-      });
+      if(!pointsDeliveries[i].finished){
+        new configMaps.maps.Marker({
+          position: { lat: pointsDeliveries[i].lat, lng: pointsDeliveries[i].lng },
+          map: map,
+          title: pointsDeliveries[i].name
+        });
+      }
     }
 
     if (coords){
@@ -66,13 +48,6 @@ export function GoogleMaps() {
       });
     }
 
-    // for (var i = 0; i < points.length; i++) {
-    //   // console.log(i)
-    //   new configMaps.maps.Marker({
-    //     position: points[i],
-    //     map: map
-    //   });
-    // };
   }
 
   useEffect(() => { showMaps() })

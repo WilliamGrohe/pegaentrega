@@ -53,6 +53,7 @@ export function Home() {
                     id={delivery.id}
                     adress={delivery.adress}
                     inRoad={delivery.inRoad}
+                    finished={delivery.finished}
                   />
                 )
               })}

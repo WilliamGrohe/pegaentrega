@@ -22,7 +22,9 @@ export function NewDeliveryForm() {
       name:newNameDelivery,
       vol: newVolumeDelivery,
       obs: newObsDelivery,
-      date: newDeliveryDate
+      date: newDeliveryDate,
+      finished: false,
+      inRoad: false
     })
   }
 

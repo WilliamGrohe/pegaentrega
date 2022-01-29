@@ -7,7 +7,9 @@ type DeliveryInfo = {
   vol: string,
   obs: string,
   adress?: string, 
-  date: string
+  date: string,
+  finished: boolean,
+  inRoad: boolean
 }
 
 type CoordinatesType = {
@@ -60,6 +62,8 @@ export function LocalsContextProvider(props: LocalsContextProviderType){
       title: deliveryInfos?.name,
       vol: deliveryInfos?.vol,
       obs: deliveryInfos?.obs,
+      finished: deliveryInfos?.finished,
+      inRoad: deliveryInfos?.inRoad
     })
 
     alert(`Entrega criada. ID: ${firebaseDelivery.key}`)

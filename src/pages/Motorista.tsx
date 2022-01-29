@@ -15,7 +15,7 @@ export function Motorista() {
 
   if (!user) {
     history.push('/')
-  } else if (user.name !== "Motorista"){
+  } else if (user.name !== "Motorista") {
     history.push('/home')
   }
 
@@ -43,9 +43,6 @@ export function Motorista() {
                 <th>STATUS<br />
                 </th>
               </tr>
-              <tr>
-                <th colSpan={5}>EM LOJA</th>
-              </tr>
             </thead>
             <tbody className="u-align-center u-table-body">
               {deliveries.map(delivery => {
@@ -56,6 +53,7 @@ export function Motorista() {
                     id={delivery.id}
                     adress={delivery.adress}
                     inRoad={delivery.inRoad}
+                    finished={delivery.finished}
                   />
                 )
               })}
