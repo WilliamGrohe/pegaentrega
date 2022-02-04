@@ -4,8 +4,9 @@ import { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
 import Modal from 'react-modal'
 
-import { handleDeleteDelivery, 
-  handleUpdateInRoadDelivery, 
+import {
+  handleDeleteDelivery,
+  handleUpdateInRoadDelivery,
   handleUpdateFinishedDelivery
 } from '../hooks/useDeliveries'
 
@@ -48,13 +49,15 @@ export function DeliveryList({
 
   const { user } = useAuth()
   const [inRoadState, setInRoadState] = useState(false)
-  const [ finishedDeliveryState, setFinishedDeliveryState] = useState(finished)
+  const [finishedDeliveryState, setFinishedDeliveryState] = useState(finished)
 
   function removeDelivery(id: string, name: string) {
     handleDeleteDelivery(id, name)
   }
 
   let subtitle: HTMLSpanElement | null;
+
+  // ----- Modal ----------
 
   const [modalIsOpen, setIsOpen] = useState(false)
 
@@ -71,86 +74,102 @@ export function DeliveryList({
     setIsOpen(false);
   }
 
+  // ------ Função carga carregada ------  
+  function onLoadButton(){
+    if(inRoad){
+      return(
+        <button id="onLoadBtn" className="btn-result" onClick={toggleInRoadBtn}>✓ Carregado</button>
+      )
+    } else {
+      return(
+        <button id="onLoadBtn" className="btn-load" onClick={toggleInRoadBtn}>Carregado</button>
+      )
+    }
+  }
+
   function isInRoad() {
     if (inRoad) {
       return emRotaIcon
-    } else {
+    } else {      
       return emLojaIcon
     }
   }
 
-  function toggleInRoadBtn (){    
+
+  function toggleInRoadBtn() {
     setInRoadState(prevRoad => !prevRoad)
     handleUpdateInRoadDelivery(id, inRoadState)
     isInRoad()
   }
 
-  function toggleFinishedDeliveryBtn(){
+  // ------ Função entrega finalizada ------
+  function toggleFinishedDeliveryBtn() {
     setFinishedDeliveryState(prevFinished => !prevFinished)
-    if(inRoad){
+    if (inRoad) {
       handleUpdateFinishedDelivery(id, finishedDeliveryState)
-    } else{
+    } else {
       alert("Entrega não foi carregada na loja ainda.")
     }
   }
 
+  // Listando as entregas de acordo com usuário logado
+  // ----- e Status da Entrega ---------------------
   function handleUserInterface() {
-    if (finished && user?.name === "Televendas") {
-      return (
-        <>
-          <td className="u-table-cell" colSpan={2} id="edit">
-            ENTREGUE ÀS {volumes}
-          </td>
-        </>
-      )
-    }
+    if (user?.name === "Televendas") {
+      if (finished) {
+        return (
+          <>
+            <td className="u-table-cell" colSpan={2} id="edit">
+              ENTREGUE ÀS {volumes}
+            </td>
+          </>
+        )
+      }
 
-    if (finished) {
       return (
         <>
-          <td className="u-table-cell">
-            <button onClick={toggleFinishedDeliveryBtn}>✓ Entregue</button>
-          </td>
+          <td className="u-table-cell">Manha</td>
           <td className="u-table-cell" id="edit">
-            ENTREGUE ÀS {volumes}
+            <img src={isInRoad()} alt="Em rota de entrega" />
+            <button className="btn-status" onClick={i => openModal(id, name)}><img src={editIcon} alt="Ver informações" /></button>
           </td>
         </>
       )
     }
-
 
     if (user?.name === "Motorista") {
+      if (finished) {
+        return (
+          <>
+            <td className="u-table-cell">
+              <button className="btn-result" onClick={toggleFinishedDeliveryBtn}>✓ Entregue</button>
+            </td>
+            <td className="u-table-cell" id="edit">
+              ENTREGUE ÀS {volumes}
+            </td>
+          </>
+        )
+      }
+
       return (
         <>
           <td className="u-table-cell">
-            <button onClick={toggleInRoadBtn}>Carregado</button>
-            <button onClick={toggleFinishedDeliveryBtn}>Entregue</button>
+            {onLoadButton()}
+            <button className="btn-load" onClick={toggleFinishedDeliveryBtn}>Entregue</button>
 
           </td>
           <td className="u-table-cell" id="edit">
             <img src={isInRoad()} alt="Em rota de entrega" />
-            <button className="btn-delete" onClick={i => openModal(id, name)}><img src={editIcon} alt="Ver informações" /></button>
+            <button className="btn-status" onClick={i => openModal(id, name)}><img src={editIcon} alt="Ver informações" /></button>
           </td>
         </>
       )
     }
-
-    return (
-      <>
-      <td className="u-table-cell">Manha</td>
-        <td className="u-table-cell" id="edit">
-          <img src={isInRoad()} alt="Em rota de entrega" />
-          <button className="btn-delete" onClick={i => openModal(id, name)}><img src={editIcon} alt="Ver informações" /></button>
-        </td>
-      </>
-    )
-
   }
-
 
   return (
     <>
-      <tr className="row-list">
+      <tr className="">
         <td className="u-table-cell" id="name"><h4>{name}</h4></td>
         <td className="u-table-cell" id="vol">{volumes}<br />
         </td>

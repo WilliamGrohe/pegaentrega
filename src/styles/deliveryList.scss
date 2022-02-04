@@ -1,9 +1,4 @@
 
-.btn-delete {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
 
 .table-action tr {
   border-bottom: 1px solid #dddddd;
@@ -69,5 +64,38 @@
 #edit {
   img{
     padding-left: 10px;
+  }
+}
+
+.btn-status {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-load {
+  background-color: var(--body-color);
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  padding: 4px 9px;
+  margin: 2px;
+  @media screen and (min-width: 500px) {
+    &:hover{
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+.btn-result {
+  background-color:rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  padding: 3px 6px;
+  margin: 2px;
+
+  @media screen and (min-width: 500px) {
+    &:hover{
+      background-color: rgba(255, 255, 255, 0.5);
+    }
   }
 }
